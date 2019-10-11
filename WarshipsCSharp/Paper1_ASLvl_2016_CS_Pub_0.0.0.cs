@@ -76,7 +76,7 @@ class Program
       }
     }
   }
-
+    //test
   private static void LoadGame(string TrainingGame, ref char[,] Board)
   {
     string Line = "";

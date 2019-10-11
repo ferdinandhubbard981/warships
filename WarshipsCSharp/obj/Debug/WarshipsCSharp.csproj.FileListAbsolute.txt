@@ -11,3 +11,9 @@ C:\Users\ferdi\Downloads\WarshipsCSharp\WarshipsCSharp\bin\Debug\WarshipsCSharp.
 C:\Users\ferdi\Downloads\WarshipsCSharp\WarshipsCSharp\bin\Debug\WarshipsCSharp.pdb
 C:\Users\ferdi\Downloads\WarshipsCSharp\WarshipsCSharp\obj\Debug\WarshipsCSharp.csprojAssemblyReference.cache
 C:\Users\ferdi\Downloads\WarshipsCSharp\WarshipsCSharp\obj\Debug\WarshipsCSharp.csproj.CoreCompileInputs.cache
+D:\warships\WarshipsCSharp\bin\Debug\WarshipsCSharp.exe.config
+D:\warships\WarshipsCSharp\bin\Debug\WarshipsCSharp.exe
+D:\warships\WarshipsCSharp\bin\Debug\WarshipsCSharp.pdb
+D:\warships\WarshipsCSharp\obj\Debug\WarshipsCSharp.csprojAssemblyReference.cache
+D:\warships\WarshipsCSharp\obj\Debug\WarshipsCSharp.exe
+D:\warships\WarshipsCSharp\obj\Debug\WarshipsCSharp.pdb
