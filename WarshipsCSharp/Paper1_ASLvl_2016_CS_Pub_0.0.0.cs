@@ -18,23 +18,23 @@ class Program
 
   const string TrainingGame = "Training.txt";
    
-  private static void CheckSunk(ref ShipType[] ships, string[,] board, int Row, int Column)
+  private static void CheckSunk(ref ShipType[] ships, char[,] board, int Row, int Column)
     {
         for(int y = 0; y < ships.Length; y++)
         {
-            for (int x = 1; x <= ships[y].Size; x++)
+            if (ships[y].Name[0] == board[Row, Column])
             {
-                if (Convert.ToChar(board[Row, Column]) == ships[y].Name[0])
-                {
-                    ships[y].Size--;
+                ships[y].Size--;
+                if (ships[y].Size == 0)
+                {                    
+                    Console.WriteLine("{0} has been sunk!", ships[y].Name);
                 }
-               
-                {
+                
+            }
 
-                }
-            }   
         }
     }
+    
   private static void GetRowColumn(ref int Row, ref int Column)
   {
     Console.WriteLine();
@@ -52,17 +52,19 @@ class Program
     GetRowColumn(ref Row, ref Column);
     if (Board[Row, Column] == 'm' || Board[Row, Column] == 'h')
     {
-      Console.WriteLine("Sorry, you have already shot at the square (" + Column + "," + Row + "). Please try again.");
+         Console.WriteLine("Sorry, you have already shot at the square (" + Column + "," + Row + "). Please try again.");
     }
     else if (Board[Row, Column] == '-')
     {
-      Console.WriteLine("Sorry, (" + Column + "," + Row + ") is a miss.");
-      Board[Row, Column] = 'm';
+        Console.WriteLine("Sorry, (" + Column + "," + Row + ") is a miss.");
+        Board[Row, Column] = 'm';
     }
     else
     {
       Console.WriteLine("Hit at (" + Column + "," + Row + ").");
-      Board[Row, Column] = 'h';
+
+        CheckSunk(ref Ships, Board, Row, Column);
+        Board[Row, Column] = 'h';
     }
   }
 
@@ -76,7 +78,7 @@ class Program
       }
     }
   }
-    //test
+
   private static void LoadGame(string TrainingGame, ref char[,] Board)
   {
     string Line = "";
@@ -214,7 +216,7 @@ class Program
         }
         else if (Board[Row, Column] == 'A' || Board[Row, Column] == 'B' || Board[Row, Column] == 'S' || Board[Row, Column] == 'D' || Board[Row, Column] == 'P')
         {
-          Console.Write(" ");
+          Console.Write(Board[Row, Column]);
         }
         else
         {
