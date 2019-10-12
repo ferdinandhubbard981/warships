@@ -17,3 +17,4 @@ D:\warships\WarshipsCSharp\bin\Debug\WarshipsCSharp.pdb
 D:\warships\WarshipsCSharp\obj\Debug\WarshipsCSharp.csprojAssemblyReference.cache
 D:\warships\WarshipsCSharp\obj\Debug\WarshipsCSharp.exe
 D:\warships\WarshipsCSharp\obj\Debug\WarshipsCSharp.pdb
+D:\warships\WarshipsCSharp\obj\Debug\WarshipsCSharp.csproj.CoreCompileInputs.cache

@@ -44,22 +44,63 @@ class Program
     Row = Convert.ToInt32(Console.ReadLine());
     Console.WriteLine();
   }
-
-  private static void MakePlayerMove(ref char[,] Board, ref ShipType[] Ships)
+    static bool TorpedoHit(ref char[,] Board, ref ShipType[] Ships, int Row, int Column)
+    {
+        if (Board[Row, Column] == 'm' || Board[Row, Column] == '-')
+        {
+            Board[Row, Column] = 'm';
+            return false;
+        }
+        else if (Board[Row, Column] == 'h')
+        {
+            return true;
+        }
+        else
+        {
+            CheckSunk(ref Ships, Board, Row, Column);
+            Board[Row, Column] = 'h';
+            return true;
+        }
+    }
+  private static void MakePlayerMove(ref char[,] Board, ref ShipType[] Ships, ref bool torpedoAvailable)
   {
-    int Row = 0;
-    int Column = 0;
-    GetRowColumn(ref Row, ref Column);
-    if (Board[Row, Column] == 'm' || Board[Row, Column] == 'h')
-    {
-         Console.WriteLine("Sorry, you have already shot at the square (" + Column + "," + Row + "). Please try again.");
-    }
-    else if (Board[Row, Column] == '-')
-    {
-        Console.WriteLine("Sorry, (" + Column + "," + Row + ") is a miss.");
-        Board[Row, Column] = 'm';
-    }
-    else
+        string choice = "n";
+        if (torpedoAvailable)
+        {
+            Console.WriteLine("Enter y if you want to use torpedo, anything else to not use it.");
+            choice = Console.ReadLine();
+
+        }
+        bool torpedo = choice == "y" ? true : false;
+        int Row = 0;
+        int Column = 0;
+        GetRowColumn(ref Row, ref Column);
+        if (torpedo)
+        {
+            torpedoAvailable = false;
+            for (int x = Row; x >= 0; x--)
+            {
+                Row = x;
+                bool torpedoHit = TorpedoHit(ref Board, ref Ships, Row, Column);
+
+                if (torpedoHit)
+                {
+                    return;
+                }
+                
+            }
+            return;
+        }
+        if (Board[Row, Column] == 'm' || Board[Row, Column] == 'h')
+        {
+             Console.WriteLine("Sorry, you have already shot at the square (" + Column + "," + Row + "). Please try again.");
+        }
+        else if (Board[Row, Column] == '-')
+        {
+            Console.WriteLine("Sorry, (" + Column + "," + Row + ") is a miss.");
+            Board[Row, Column] = 'm';
+        }
+        else
     {
       Console.WriteLine("Hit at (" + Column + "," + Row + ").");
 
@@ -252,11 +293,12 @@ class Program
 
   private static void PlayGame(ref char[,] Board, ref ShipType[] Ships)
   {
+        bool torpedoAvailable = true;
     bool GameWon = false;
     while (GameWon == false)
     {
       PrintBoard(Board);
-      MakePlayerMove(ref Board, ref Ships);
+      MakePlayerMove(ref Board, ref Ships, ref torpedoAvailable);
       GameWon = CheckWin(Board);
       if (GameWon == true)
       {
@@ -282,6 +324,7 @@ class Program
 
   static void Main(string[] args)
   {
+    
     ShipType[] Ships = new ShipType[5];
     char[,] Board = new char[10, 10];
     int MenuOption = 0;
